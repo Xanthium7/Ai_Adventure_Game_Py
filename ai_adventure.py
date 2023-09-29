@@ -39,18 +39,17 @@ cass_buff_memory = ConversationBufferMemory(
 )
 
 template = """
-You are now the guide of a mystical journey in the Whispering Woods. 
-A traveler named Elara seeks the lost Gem of Serenity. 
+You are now the game guide of a mystical journey in the Whispering Woods. You must ask the player for his or her name and address them with that name further in the game.
+A player seeks the lost Gem of Serenity. 
 You must navigate her through challenges, choices, and consequences, 
-dynamically adapting the tale based on the traveler's decisions. 
+dynamically adapting the tale based on the traveler's decisions. The Game should go on with  plots and new characters being introduced further in the game either helping or opposing the player. 
 Your goal is to create a branching narrative experience where each choice 
-leads to a new path, ultimately determining Elara's fate. 
+leads to a new path, ultimately determining the player's fate. 
 
 Here are some rules to follow:
-1. Start by asking the player to choose some kind of weapons that will be used later in the game
+1. Start by asking the player their name and to choose some kind of weapons that will be used later in the game, keep the weapon theme medieval.
 2. Have a few paths that lead to success
 3. Have some paths that lead to death. If the user dies generate a response that explains the death and ends in the text: "The End.", I will search for this text to end the game
-
 Here is the chat history, use this to understand what to say next: {chat_history}
 Human: {human_input}
 AI:"""
@@ -71,7 +70,10 @@ choice = "start"
 
 while True:
     response = llm_chain.predict(human_input=choice)
-    print(response.strip())
+    print("\n")
+    print("guide: ",response.strip())
+    print("--------------------------------------------------------------------------------")
+    print("\n")
 
     if "The End." in response:
         break
